@@ -189,3 +189,36 @@ export default function App() {
 Props can only be passed from parent component to child (unidirectional flow).
 
 5. Modifying state should happen with the setState ( ) method.
+
+# Event Listners Vanilla JS Methods:
+1.
+```jsx
+addEventListner("click",function() {})
+```
+2.
+```jsx
+<button onClick="myfunction()"></button>
+```
+
+# Event Listners in React Components:
+
+```jsx
+//Syntax
+<button onClick={myfunction}></button>
+```
+
+**Example:**
+```jsx
+export default function App() {
+    function handleClick() {
+        console.log("I was clicked!")
+    }
+    
+    return (
+        <div className="container">
+            <button onClick={handleClick}>Click me</button>
+        </div>
+    )
+}
+
+```
