@@ -222,3 +222,75 @@ export default function App() {
 }
 
 ```
+# Use state Methods:
+
+1.useState returns array of initial value and function.
+2.function is used to update the value.
+
+```jsx
+1. import {useState} from 'react'
+
+2. function() {
+    React.useState()
+    return();
+}
+```
+
+**Array Destructuring in Use State:**
+```jsx
+export default function App() {
+    //Array destructuring
+    const [isImportant, func] = React.useState("Yes")
+    console.log(isImportant)
+    return ()
+```
+
+**Example**
+```jsx
+//Counter example(directly assigning new value)
+
+import { useState } from "react"
+
+//useState returns array of initial value and function.
+//function is used to update the value.
+export default function Counter() {
+    const[count,setCount]=useState(0)
+
+    function onAdd() {
+        setCount(count+1);
+    }
+
+    function onSubtract() {
+        if(count >0) {
+        setCount(count-1);
+        }
+    }
+    return(
+        <>
+        <div className="show">
+            <h1>{count}</h1>
+        </div>
+        <div className="btns">
+            <button type="button" onClick={onAdd}>ADD</button>
+            <button type="button" onClick={onSubtract}>SUBTRACT</button>
+        </div>
+        </>
+    )
+}
+```
+
+**NOTE:**
+If you ever need the old value of state to help you determine the new value of state, you should pass a callback function to yourstate setter function instead of usingstate directly. <br>
+This **Callback function** will receive the old value of state as its parameter, which you can then use to determine your new value of state.
+
+```jsx
+//Callback function method
+
+function add() {
+        setCount(prevCount => prevCount + 1)
+    }
+   
+function subtract() {
+        setCount(prevCount => prevCount - 1)
+    }
+```
