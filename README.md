@@ -294,3 +294,54 @@ function subtract() {
         setCount(prevCount => prevCount - 1)
     }
 ```
+
+# Complex State: Array
+
+**We don't directly change in existing array using push()**
+
+```jsx
+ const[task,setTask] = useState(["Thing1", "Things2"]);
+
+    function addItem() {
+       setTask(prevThingsArr=> {
+            return ([...prevThingsArr,`Thing ${prevThingsArr.length+1}`])
+        }) 
+    }
+    const tasks=task.map(thing=><div key={thing}>{thing}</div>);
+```
+
+# Complex State: Objects
+
+To change the object property we first copy the old data and then overwrite the properties we want to change the value to new value.
+
+```jsx
+export default function Card() {
+    const [contact,setContact] = useState(
+        {
+            firstName:"Sehaj",
+            lastName:"Kohli",
+            age:20,
+            email:"sk@developers.com",
+            phoneNo:"+91 8567432",
+            Favourite: "Yes",
+        }
+    )
+
+    function favAdd() {
+        setContact(prevInfo =>{
+            return {
+                ...prevInfo,
+                firstName:"SK",
+                Favourite:"No",
+            }
+        })
+    }
+
+```
+
+**Accessing the object properties**
+
+```jsx
+<p className="t1">{contact.age}</p>
+<p className="t1">{contact.phoneNo}</p>
+```
