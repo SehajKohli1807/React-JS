@@ -345,3 +345,75 @@ export default function Card() {
 <p className="t1">{contact.age}</p>
 <p className="t1">{contact.phoneNo}</p>
 ```
+
+# Passing state as props:
+- We can pass data from parent to child component using **props**.
+
+```jsx
+// Parent Component (import child component file in parent component)
+
+export default function App() {
+    const [count, setCount] = React.useState(0)
+
+     return (
+        <div className="counter">
+            <Count number={count} /> 
+        </div>
+    )
+```
+
+```jsx
+// Child Component
+export default function Count(props) {  
+    return (
+        <div className="counter--count">
+            <h1>{props.number}</h1>
+        </div>
+    )
+}
+```
+
+# Changing state from child component:
+
+**We Will pass the change state function to child component as prop to child component so that we make state change in child component itself**
+
+```jsx
+//Parent component 
+
+export default function App() {
+    const [contact, setContact] = React.useState({
+        firstName: "John",
+        lastName: "Doe",
+        phone: "+1 (719) 555-1212",
+        email: "itsmyrealname@example.com",
+        isFavorite: true
+    })
+    
+    function toggleFavorite() {
+        setContact(prevContact => ({
+            ...prevContact,
+            isFavorite: !prevContact.isFavorite
+        }))
+    }
+
+    return (
+        <Star isFilled={contact.isFavorite} handleClick={toggleFavorite} />
+    )
+}
+```
+
+```jsx
+//Child Component 
+
+//It will change the state of star icon
+export default function Star(props) {
+    const starIcon = props.isFilled ? "star-filled.png" : "star-empty.png"
+    return (
+        <img 
+            src={`../images/${starIcon}`} 
+            className="card--favorite"
+            onClick={props.handleClick}
+        />
+    )
+}
+```
