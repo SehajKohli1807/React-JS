@@ -417,3 +417,86 @@ export default function Star(props) {
     )
 }
 ```
+
+# Forms in React:
+**Difference between early methods forms and react forms**
+* Early method form - It's a collection of input elements that are used to collect user information after the form is submitted (or submit button is clicked).
+
+* React forms - They collect information after every input element(checkbox, radio button etc) is updated by user. Information is gathered side by side.
+
+# INPUT:-
+
+* If you pass value without onChange, it will be impossible to type into the input. It will only display the default value and input text won't be updated.
+
+If you want to control this input with a state variable, specify an onChange handler:
+```jsx
+<input value={something} onChange={e => setSomething(e.target.value)} />
+```
+
+**Checkbox:**
+If you want to control this checkbox with a state variable, specify an onChange handler:
+```jsx
+<input type="checkbox" checked={something} onChange={e => setSomething(e.target.checked)} />
+```
+
+**NOTE:**
+* You need to read **e.target.checked** rather than **e.target.value** for checkboxes.
+
+* Event prop gives all the information about ongoing changes in the input.
+```jsx
+function HandleClick(event){
+// console.log(event) -> gives out html element(actually a DOM element)
+
+SetFirstName(event.target.value); //update the firstName state on every keystroke        
+}
+
+SetFirstName(event.target); //update the firstName at last of the event.
+```
+
+**Using Single Event Handler function to handle all events**
+
+```jsx
+import { useState } from "react"
+
+export default function Forms() {
+    const[formData,setformData]=useState(
+        {firstName:"",
+         lastName:"",
+        }
+    )
+
+    console.log(formData);
+    function handleChange(event) {
+        setformData(previousData=>{
+            return{
+                ...previousData,
+                [event.target.name]:event.target.value
+                //IMPORTANT:- It will assign the correct value to correct attribute on the basis of name.
+                //The name attribute in input tag and in useState() should be same.
+            }
+        })
+    }
+    return(
+        <div className="forms-main">
+            <form action="#">
+                <input 
+                type="text"
+                placeholder="enter your first name"
+                name="firstName"
+                onChange={handleChange}
+                ></input>
+                
+                <input 
+                type="text"
+                placeholder="enter your last name"
+                name="lastName"
+                onChange={handleChange}
+                ></input>
+            </form>
+        </div>
+    )
+}
+```
+
+**NOTE:**
+* Assign same name in input tag-> name attribute(<input name="">) and in useState 
