@@ -453,7 +453,16 @@ SetFirstName(event.target.value); //update the firstName state on every keystrok
 SetFirstName(event.target); //update the firstName at last of the event.
 ```
 
+# Controlled Components:
+
+* In HTML, form elements such as <input>, <textarea>, and <select> typically **maintain their own state** and update it based on user input. In React, mutable state is typically kept in the state property of components, and only updated with setState().
+
+We can combine the two by making the React state be the “single source of truth”. Then the React component that renders a form also controls what happens in that form on subsequent user input. An input form element whose value is controlled by React in this way is called a “controlled component”.
+
+* **SOLUTION:** We will add Value attribute in input tag and assign it react state value.(Example below) 
+
 **Using Single Event Handler function to handle all events**
+
 
 ```jsx
 import { useState } from "react"
@@ -484,6 +493,7 @@ export default function Forms() {
                 placeholder="enter your first name"
                 name="firstName"
                 onChange={handleChange}
+                value={formData.firstName}
                 ></input>
                 
                 <input 
@@ -491,6 +501,7 @@ export default function Forms() {
                 placeholder="enter your last name"
                 name="lastName"
                 onChange={handleChange}
+                value={formData.lastName}
                 ></input>
             </form>
         </div>
@@ -498,5 +509,6 @@ export default function Forms() {
 }
 ```
 
-**NOTE:**
-* Assign same name in input tag-> name attribute(<input name="">) and in useState 
+**IMPORTANT NOTE:**
+* Assign same name in input tag-> name attribute(<input name="">) and in useState.
+* Use value attribute in input tag and assign the value of react state to make it **controlled component**.
