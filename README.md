@@ -605,3 +605,42 @@ function handleChange(event) {
   <br />
 </fieldset>
 ````
+# Select option in form:
+
+- In select tag we will add properties like value, name, onChange etc. (Not In option tags)
+
+```jsx
+<label htmlFor="favColor">What is your favorite color?</label>
+            <br />
+            <select
+                id="favColor"
+                value={formData.favColor}
+                onChange={handleChange}
+                name="favColor"
+            >
+                <option value="">-- Choose --</option>
+                <option value="red">Red</option>
+                <option value="orange">Orange</option>
+                <option value="yellow">Yellow</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="indigo">Indigo</option>
+                <option value="violet">Violet</option>
+            </select>
+```
+
+# Submitting form:
+
+- Add onSubmit property and pass function to it in the form tag
+
+```jsx
+
+    function handleSubmit(event) {
+        event.preventDefault()   //Prevent lost of state after refreshing page
+        // submitToApi(formData)
+        console.log(formData)
+    }
+
+        <form onSubmit={handleSubmit}>
+        <form/>
+````
